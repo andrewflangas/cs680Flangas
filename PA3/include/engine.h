@@ -3,7 +3,6 @@
 
 #include <sys/time.h>
 #include <assert.h>
-#include <GLUT/glut.h>
 #include <cstring>
 #include <string.h>
 
@@ -25,7 +24,7 @@ class Engine
     Engine(string name);
     ~Engine();
     bool Initialize();
-    void displayText( float x, float y, int r, int g, int b, const char *string );
+    
     void Run();
     void Runmoon();
     void RunReverse();

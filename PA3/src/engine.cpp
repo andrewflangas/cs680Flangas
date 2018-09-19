@@ -63,18 +63,6 @@ bool Engine::Initialize()
 }
 
 
-void Engine::displayText( float x, float y, int r, int g, int b, const char *string ) {
-  int j = strlen( string );
- 
-  glColor3f( r, g, b );
-  glRasterPos2f( x, y );
-  for( int i = 0; i < j; i++ ) {
-    glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, string[i] );
-  }
-}
-
-
-
 void Engine::Run()
 {
   m_running = true;
@@ -150,7 +138,7 @@ void Engine::Keyboard()
 
       
       RunReverse();
-      displayText(0, 0, 0, 1, 0, "Planet and moon are moving counterclockwise.");
+      
 
 
     }
@@ -160,7 +148,7 @@ void Engine::Keyboard()
 
       
       Run();
-      displayText(0, 0, 0, 1, 0, "Planet and moon are moving clockwise.");
+      
       
 
     }
