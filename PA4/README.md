@@ -56,7 +56,7 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 ```
 # PA4: Blender and Model Loading
 
-In order to load other .obj files, simply go into main.cpp and navigate to line 16. There you will find the loadFile function, for which you can change the name of the file to whatever you choose. 
+In order to load the files you must type them as the first argument on the command line, the second argument on the command line will be the colors. The two options for the colors are random and material. For example, to load the dragon file with a material color you would type ./Tutorial dragon material. 
 
 
 
