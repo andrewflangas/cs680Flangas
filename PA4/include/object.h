@@ -6,14 +6,14 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-//#include "OBJ_Loader.h"
+
 
 
 
 class Object
 {
   public:
-    Object();
+    Object(char** argv);
     ~Object();
     void Update(unsigned int dt);
     void Reverse(unsigned int dt);
@@ -27,15 +27,15 @@ class Object
     glm::mat4 model;
     std::vector<Vertex> Vertices;
     std::vector<unsigned int> Indices;
-   // GLuint VB;
-   // GLuint IB;
+    GLuint VB;
+    GLuint IB;
 
-    //objl::Loader loader;
-
-
+    
 
 
-    //float angle;
+
+
+    float angle;
 };
 
 #endif /* OBJECT_H */

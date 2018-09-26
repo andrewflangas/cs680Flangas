@@ -1,10 +1,10 @@
 #include "object.h"
 
 
-Object::Object()
+Object::Object(char** argv)
 {  
   /*
-    # Blender File for a Cube
+    # Blender fin for a Cube
     o Cube
     v 1.000000 -1.000000 -1.000000
     v 1.000000 -1.000000 1.000000
@@ -53,7 +53,109 @@ Object::Object()
     3, 2, 7,
     3, 7, 4,
     5, 1, 8
-  };        
+  };       */ 
+
+
+  std::ifstream fin; 
+  std::ifstream mfin;
+  Vertex ver({0,0,0}, {0,0,0});
+  char* standin;
+  long fla;
+  std::string strTemp; 
+  std::string w, mw;
+
+  if(std::string(argv[1])=="dragon"){
+
+    fin.open("../Object/dragon.obj");
+  }
+  else if(std::string(argv[1])=="table"){
+
+    fin.open("../Object/table.obj");
+
+  }
+  if(!fin){
+
+    std::cerr<< "Unable to open fin";
+    exit(1);
+
+  }
+  //std::string w, mw;
+  while(fin>>w){
+
+    if(w == "v"){
+
+      if(std::string(argv[2])== "random"){
+
+        fin >> ver.vertex.x;
+        fin >> ver.vertex.y;
+        fin >> ver.vertex.z;
+        std::cout << ver.vertex.x<<""<<ver.vertex.y<<""<<ver.vertex.z << std::endl; 
+        ver.color.r=(rand()%100)/100.0;
+        ver.color.g=(rand()%100)/100.0;
+        ver.color.b=(rand()%100)/100.0;
+
+      }
+      else if(std::string(argv[2])=="material"){
+
+        fin >> ver.vertex.x;
+        fin >> ver.vertex.y;
+        fin >> ver.vertex.z;
+
+        std::cout << ver.vertex.x<<""<<ver.vertex.y<<""<<ver.vertex.z<<std::endl;
+
+
+
+      }
+
+        Vertices.push_back(ver);
+    }
+
+    else if(w == "f"){
+
+      for(int i =1; i<=3; i++){
+
+        fin>>strTemp;
+        fla=strtol(strTemp.c_str(), &standin,10);
+        Indices.push_back(fla);
+        std::cout<<fla<<" ";
+
+
+      }
+
+      std::cout<<std::endl;
+
+    }
+    else if(w=="mtllib"){
+
+      fin>>w;
+      mfin.open(w);
+      while(mfin>>mw){
+        if(mw =="Kd"){
+
+          mfin >> ver.color.r;
+          mfin >> ver.color.g;
+          mfin >> ver.color.b;
+          break;
+
+        }
+        else{
+
+          mfin.ignore(100,'\n');
+        }
+
+
+      }
+      mfin.close();
+
+    }
+    else{
+
+      fin.ignore(100, '\n');
+
+    }
+
+  }
+  fin.close();
 
 
 
@@ -61,7 +163,13 @@ Object::Object()
 
 
 
-  // The index works at a 0th index
+
+
+
+
+
+
+  // The fla works at a 0th fla
   for(unsigned int i = 0; i < Indices.size(); i++)
   {
     Indices[i] = Indices[i] - 1;
@@ -75,12 +183,10 @@ Object::Object()
 
   glGenBuffers(1, &IB);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW); */
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW); 
 
-// Read our .obj file
-  //loader.LoadFile("dragon.obj");
-
-  //std::cout << loader.LoadedMeshes[0].MeshName << std::endl;
+// Read our .obj fin
+  
 
 
 
@@ -102,7 +208,7 @@ Object::~Object()
 void Object::Update(unsigned int dt)
 {
 
-  /*angle += dt * M_PI/1000;
+  angle += dt * M_PI/1000;
 
   //model = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
 
@@ -111,7 +217,7 @@ void Object::Update(unsigned int dt)
   glm::mat4 ViewTranslate = glm::translate(rotation, glm::vec3(5.0, 0.0, 0.0));
 
 
-  model = glm::rotate(ViewTranslate, (angle), glm::vec3(0.0, 1.0, 0.0)); */
+  model = glm::rotate(ViewTranslate, (angle), glm::vec3(0.0, 1.0, 0.0)); 
 
   
 }
@@ -144,7 +250,7 @@ glm::mat4 Object::GetModel()
 
 void Object::Render()
 {
-  /*glEnableVertexAttribArray(0);
+  glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
 
   glBindBuffer(GL_ARRAY_BUFFER, VB);
@@ -156,7 +262,7 @@ void Object::Render()
   glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);
 
   glDisableVertexAttribArray(0);
-  glDisableVertexAttribArray(1); */
+  glDisableVertexAttribArray(1); 
 
 }
 

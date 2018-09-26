@@ -12,7 +12,7 @@ using namespace std;
 class Graphics
 {
   public:
-    Graphics();
+    Graphics(char** argv);
     ~Graphics();
     bool Initialize(int width, int height);
     void Update(unsigned int dt);
@@ -28,6 +28,7 @@ class Graphics
     GLint m_projectionMatrix;
     GLint m_viewMatrix;
     GLint m_modelMatrix;
+    char** lol; 
 
     Object *m_cube;
 };
